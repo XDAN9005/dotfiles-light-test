@@ -11,6 +11,9 @@ print_status() { echo -e "${GREEN}[INFO]${NC} $1"; }
 print_warning() { echo -e "${YELLOW}[WARNING]${NC} $1"; }
 print_section() { echo -e "\n${BLUE}=== $1 ===${NC}"; }
 
+print_section "Updating Reflector"
+reflector --country Mexico --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+
 print_section "Updating system packages"
 pacman -Syu --noconfirm
 
@@ -42,7 +45,7 @@ pacman -S --noconfirm bspwm \
                       sxhkd \
                       flameshot \
                       betterlockscreen \
-                      lightdm lightdm-gtk-greeter
+                      lightdm
 
 print_section "Herramientas para temas dinámicos"
 sudo pacman -S --noconfirm python-pywal \
@@ -157,11 +160,16 @@ print_section "Optimizaciones para laptop vieja"
 print_status "Configurando swappiness para SSD/HDD..."
 echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
 
+git clone --recursive https://github.com/JezerM/nody-greeter.git
+cd nody-greeter
+npm install
+npm run rebuild
+npm run build
+sudo node make install
+cd ../
+
 print_section "Limpieza del sistema"
 sudo pacman -Sc --noconfirm
-
-print_section "Reflector"
-reflector --country Mexico --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
 print_status "Usuario actual: $USER"
 print_status "Grupos añadidos: audio, lp, input"
