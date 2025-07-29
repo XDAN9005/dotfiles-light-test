@@ -61,6 +61,11 @@ pacman -S --noconfirm pulseaudio \
 
 usermod -a -G audio $USER
 
+print_section "Instaling Themes"
+pacman -S --noconfirm gnome-themes-extra \
+                      breeze-icons \
+                      ocean-sound-theme
+
 print_section "Installing Bluetooth and Connectivity Tools"
 pacman -S --noconfirm bluez \
                       bluez-utils \

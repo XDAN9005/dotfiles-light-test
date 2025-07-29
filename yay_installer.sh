@@ -20,7 +20,8 @@ yay -S --noconfirm \
     ani-cli \
     ani-skip-git \
     wpgtk-git \
-    xpadneo-dkms
+    xpadneo-dkms \
+    dracula-cursors-git
 
 yay -Sc --noconfirm
 
